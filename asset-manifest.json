@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/chatx/static/css/main.db274f56.css",
-    "main.js": "/chatx/static/js/main.c77b5978.js",
+    "main.js": "/chatx/static/js/main.116e2e28.js",
     "index.html": "/chatx/index.html",
     "main.db274f56.css.map": "/chatx/static/css/main.db274f56.css.map",
-    "main.c77b5978.js.map": "/chatx/static/js/main.c77b5978.js.map"
+    "main.116e2e28.js.map": "/chatx/static/js/main.116e2e28.js.map"
   },
   "entrypoints": [
     "static/css/main.db274f56.css",
-    "static/js/main.c77b5978.js"
+    "static/js/main.116e2e28.js"
   ]
 }
