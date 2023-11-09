@@ -1,0 +1,48 @@
+.button {
+    background-color: #333;
+    border-radius: 5px;
+    padding: 15px;
+
+    color: white;
+    cursor: pointer;
+
+    transition: 0.2s all;
+
+    user-select: none;
+}
+
+.button:hover {
+    background-color: #555;
+}
+
+input[type="text"] {
+    background-color: #555;
+    border-radius: 5px;
+    padding: 15px;
+
+    color: white;
+
+    transition: 0.2s all;
+    user-select: none;
+
+    border: none;
+    outline: none;
+
+    width: 70%;
+}
+
+input[type="text"]::placeholder {
+    color: #aaa;
+}
+
+input[type="text"]:hover {
+    background-color: #777;
+}
+
+.localSDP {
+    background-color: #555;
+    border-radius: 5px;
+
+    color: white;
+    padding: 5px;
+}
