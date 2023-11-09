@@ -8,7 +8,9 @@ const CreateRoom = ({ setDataChannel }) => {
     const peerConnection = useRef(null)
 
     const createOfferClick = () => {
-        peerConnection.current = new RTCPeerConnection()
+        peerConnection.current = new RTCPeerConnection({
+            iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+        })
 
         const channel = peerConnection.current.createDataChannel("chat")
         setDataChannel(channel)
