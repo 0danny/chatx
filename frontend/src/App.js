@@ -1,39 +1,19 @@
-import React, { useState } from "react"
-import CreateRoom from "./CreateRoom"
-import JoinRoom from "./JoinRoom"
-import Chat from "./Chat"
+import { Routes, Route } from "react-router-dom"
+import { SocketProvider } from "./providers/SocketProvider"
 
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import "react-tabs/style/react-tabs.css"
+import Home from "./pages/Home"
+import Front from "./pages/Front"
 
 function App() {
-    const [dataChannel, setDataChannel] = useState(null)
-
-    const handleDataChannel = (channel) => {
-        setDataChannel(channel)
-    }
-
     return (
-        <div className="app">
-            <Tabs style={{ width: "100%" }}>
-                <TabList>
-                    <Tab>Host</Tab>
-                    <Tab>Client</Tab>
-                </TabList>
-
-                <TabPanel>
-                    <CreateRoom setDataChannel={setDataChannel} />
-                </TabPanel>
-
-                <TabPanel>
-                    <JoinRoom setDataChannel={setDataChannel} />
-                </TabPanel>
-            </Tabs>
-
-            <div className="seperator" style={{ marginTop: "20px" }}></div>
-
-            <Chat dataChannel={dataChannel} />
-        </div>
+        <>
+            <SocketProvider>
+                <Routes>
+                    <Route exact path="/" element={<Home />} />
+                    <Route exact path="/front" element={<Front />} />
+                </Routes>
+            </SocketProvider>
+        </>
     )
 }
 

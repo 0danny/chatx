@@ -1,0 +1,21 @@
+.home-container {
+    background-color: #31355b;
+
+    height: calc(100% - 80px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.home-rooms-list {
+    background-color: #31355b;
+    flex-grow: 1;
+
+    border-radius: 15px;
+
+    margin-top: 15px;
+}
