@@ -1,0 +1,11 @@
+.room-sidebar {
+    width: 320px;
+    height: 100%;
+
+    background-color: #212540;
+}
+
+.room-chat {
+    width: calc(100% - 320px);
+    height: 100%;
+}

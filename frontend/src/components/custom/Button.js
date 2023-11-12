@@ -1,6 +1,6 @@
-const Button = ({ text, onclick }) => {
+const Button = ({ text, onclick, style }) => {
     return (
-        <div className="custom-button" onClick={onclick && onclick}>
+        <div className="custom-button" onClick={onclick && onclick} style={style}>
             {text}
         </div>
     )
