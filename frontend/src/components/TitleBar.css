@@ -7,6 +7,8 @@
     background-color: #212540;
     padding: 15px;
     height: 80px;
+
+    border-bottom: 1px solid white;
 }
 
 .title-bar svg {

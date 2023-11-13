@@ -4,7 +4,7 @@ import io from "socket.io-client"
 // Create a context
 const SocketContext = createContext(null)
 
-const socketAddress = "http://localhost:4000"
+const socketAddress = "http://170.64.163.235:4000"
 
 export const useSocket = () => {
     return useContext(SocketContext)

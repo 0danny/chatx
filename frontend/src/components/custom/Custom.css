@@ -54,6 +54,11 @@
 
     cursor: pointer;
     transition: 0.2s all;
+
+    /* Don't wrap the text */
+    white-space: nowrap;
+
+    user-select: none;
 }
 
 .custom-button:hover {
@@ -145,6 +150,8 @@
     width: 100%;
 }
 
+/* Fix the border radius with the button is on the right side. */
+
 .custom-input-group span {
     background-color: #43487c;
     font-size: 1rem;
@@ -154,16 +161,19 @@
     border-bottom-left-radius: 5px;
 
     height: 40px;
+
+    user-select: none;
 }
 
 .custom-input-group input {
+    border-radius: 0px 5px 5px 0px;
+
     width: 100%;
 }
 
 input[type="text"] {
     background-color: #4a518a;
     color: white;
-    border-radius: 0px 5px 5px 0px;
     padding: 10px;
 
     transition: 0.2s all;
@@ -174,6 +184,10 @@ input[type="text"] {
     font-size: 1rem;
 
     height: 40px;
+}
+
+input[type="text"]::placeholder {
+    color: #b0b0b0;
 }
 
 input[type="text"]:hover {

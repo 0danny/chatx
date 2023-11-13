@@ -53,3 +53,26 @@ html,
 
     padding: 20px;
 }
+
+/* Custom scrollbar that matches color theme */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #212540;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #4a518a;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #5f68a9;
+}

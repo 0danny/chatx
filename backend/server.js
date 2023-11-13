@@ -24,10 +24,27 @@ const getAllRooms = () => {
     return rooms
 }
 
+//Make the users into a function that takes in a room id.
+
+//Get a list of all users in a room
+const getUsersInRoom = (room) => {
+    try {
+        return Array.from(io.sockets.adapter.rooms.get(room)).map((id) => {
+            return io.sockets.sockets.get(id).username
+        })
+    } catch (ex) {
+        console.log(`getUsersInRoom() -> ${room} no longer exists.`)
+
+        return []
+    }
+}
+
 // Set up a connection event and listen for our custom events
 io.on("connection", (socket) => {
     console.log("A user connected:", socket.id)
     socket.isHost = false
+    socket.username = "Unknown"
+    socket.belongsTo = []
 
     socket.on("create-room", () => {
         //Create a new room using UUID V4
@@ -66,7 +83,11 @@ io.on("connection", (socket) => {
 
         if (room) {
             socket.join(room)
-            io.to(room).emit("new-user", { socketId: socket.id, username: username })
+            socket.belongsTo.push(room)
+            socket.username = username
+
+            //Get a list of every in the room's usernames
+            io.to(room).emit("new-user", socket.id, getUsersInRoom(room))
         }
     })
 
@@ -75,15 +96,18 @@ io.on("connection", (socket) => {
     })
 
     socket.on("forward-remote-description", (sdp, to) => {
-        io.to(to).emit("remote-description", sdp, socket.id)
-    })
-
-    socket.on("get-rooms", (data) => {
-        socket.emit("rooms", io.sockets.adapter.rooms)
+        io.to(to).emit("incoming-remote-sdp", sdp, socket.id)
     })
 
     socket.on("disconnect", () => {
         console.log("User disconnected:", socket.id)
+
+        //Notify each room the users connected to with a new users list.
+        console.log("User belongs to: ", socket.belongsTo)
+
+        socket.belongsTo.forEach((room) => {
+            io.to(room).emit("user-disconnected", getUsersInRoom(room), socket.id)
+        })
     })
 })
 

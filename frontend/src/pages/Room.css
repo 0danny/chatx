@@ -3,9 +3,104 @@
     height: 100%;
 
     background-color: #212540;
+
+    padding: 20px;
+
+    overflow-y: auto;
 }
 
 .room-chat {
+    display: flex;
+    flex-direction: column;
     width: calc(100% - 320px);
     height: 100%;
+}
+
+.room-user {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    padding: 10px;
+
+    background-color: #4a518a;
+
+    align-items: center;
+
+    font-size: 1.2rem;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+    transition: 0.2s all;
+}
+
+.room-user:hover {
+    background-color: #43487c;
+}
+
+.room-user svg {
+    font-size: 1.4rem;
+}
+
+.room-user span {
+    margin-left: 10px;
+    margin-bottom: 2px;
+}
+
+.room-chat-controls {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+}
+
+.room-chat-controls input {
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+    height: 40px;
+}
+
+.room-chat-controls {
+    padding: 20px;
+}
+
+.room-chat-messages {
+    flex-grow: 1;
+    border-bottom: 1px solid white;
+
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.room-chat-controls > .custom-button {
+    border-radius: 0px 5px 5px 0px;
+    background-color: #43487c;
+    height: 40px;
+}
+
+.room-message {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    margin-bottom: 15px;
+}
+
+.room-message-icon {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    margin-bottom: 10px;
+}
+
+.room-message-icon svg {
+    font-size: 1.4rem;
+    margin-right: 10px;
 }
