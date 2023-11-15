@@ -3,13 +3,19 @@ const express = require("express")
 const http = require("http")
 const socketIO = require("socket.io")
 const { v4: uuidv4 } = require("uuid")
+const path = require("path")
 
 // Create an Express application and a HTTP server
 const app = express()
 const server = http.createServer(app)
-const io = socketIO(server)
 
-const PORT = 4000
+app.use(express.static(path.join(__dirname, "public")))
+
+const io = socketIO(server, {
+    path: "/websocket",
+})
+
+const port = 80
 
 const getAllRooms = () => {
     const rooms = {}
@@ -23,8 +29,6 @@ const getAllRooms = () => {
     })
     return rooms
 }
-
-//Make the users into a function that takes in a room id.
 
 //Get a list of all users in a room
 const getUsersInRoom = (room) => {
@@ -46,6 +50,9 @@ io.on("connection", (socket) => {
     socket.username = "Unknown"
     socket.belongsTo = []
 
+    //On user connect
+    socket.emit("rooms", getAllRooms())
+
     socket.on("create-room", () => {
         //Create a new room using UUID V4
         const room = `chatx-${uuidv4()}`
@@ -56,8 +63,8 @@ io.on("connection", (socket) => {
         socket.join(room)
         socket.emit("room-created", room)
 
-        //Print out list of all rooms, with users and room names
-        console.log(getAllRooms())
+        //Broadcast to everyone, new list of rooms.
+        io.emit("rooms", getAllRooms())
     })
 
     socket.on("local-description", (sdp, to) => {
@@ -66,6 +73,13 @@ io.on("connection", (socket) => {
 
     socket.on("check-host", (room) => {
         console.log(`Finding socket id of host in ${room}`)
+
+        //Return empty if the room doesn't exist
+        if (!io.sockets.adapter.rooms.has(room)) {
+            console.log(`Room ${room} doesn't exist.`)
+
+            socket.emit("whos-host", "")
+        }
 
         //Find the host socket id in the room
         const hostSocketId = Array.from(io.sockets.adapter.rooms.get(room)).find((id) => {
@@ -111,6 +125,6 @@ io.on("connection", (socket) => {
     })
 })
 
-server.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`)
+server.listen(port, () => {
+    console.log(`Server listening on port ${port} -> Websocket on /websocket`)
 })

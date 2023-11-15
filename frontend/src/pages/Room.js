@@ -21,11 +21,20 @@ const Room = () => {
 
     const { id } = useParams()
     const socket = useSocket()
+    const messagesEndRef = useRef(null)
 
     var thisPeer = useRef(null)
     var peers = useRef({})
     var hostSocketId = useRef("")
     var hasJoined = useRef(false)
+
+    useEffect(() => {
+        //Fix the scrolling
+        messagesEndRef?.current.scroll({
+            top: messagesEndRef?.current.scrollHeight,
+            behavior: "smooth",
+        })
+    }, [roomMessages])
 
     //If the username is already set, we can run init.
     useEffect(() => {
@@ -56,6 +65,13 @@ const Room = () => {
             console.log(`The host is -> ${hSocketId}`)
 
             hostSocketId.current = hSocketId
+
+            console.log(`Host Test: ${hostSocketId.current} - ${socket.id}`)
+
+            if (hostSocketId.current === null) {
+                //If the host is null aka the room doesn't exist, return back to home page.
+                window.location.href = "#"
+            }
         })
 
         socket.on("user-disconnected", (newList, disconnectedUserId) => {
@@ -271,7 +287,7 @@ const Room = () => {
                 </RoomSidebar>
 
                 <RoomChat>
-                    <div className="room-chat-messages">
+                    <div className="room-chat-messages" ref={messagesEndRef} id="room-chat-scroller">
                         {roomMessages.map((message, index) => {
                             //Only render if the message is not empty.
                             if (message.message) {

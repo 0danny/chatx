@@ -22,18 +22,13 @@
     width: 100%;
 
     padding: 10px;
-
     background-color: #4a518a;
-
     align-items: center;
-
     font-size: 1.2rem;
-
     border-radius: 10px;
-
     margin-bottom: 10px;
-
     transition: 0.2s all;
+    overflow-wrap: anywhere;
 }
 
 .room-user:hover {
@@ -75,6 +70,8 @@
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
+
+    overflow: auto;
 }
 
 .room-chat-controls > .custom-button {
@@ -103,4 +100,15 @@
 .room-message-icon svg {
     font-size: 1.4rem;
     margin-right: 10px;
+}
+
+/* If the screen width is 400px or smaller */
+@media screen and (max-width: 700px) {
+    .room-sidebar {
+        display: none;
+    }
+
+    .room-chat {
+        width: 100%;
+    }
 }
